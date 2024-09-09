@@ -1,5 +1,5 @@
 //
-//  CYUnit.swift
+//  CaiyunUnit.swift
 //  
 //
 //  Created by 袁林 on 2021/6/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum CYUnit: String, Codable, Equatable {
+public enum CaiyunUnit: String, Codable, Equatable {
     /// 默认公制
     case metric
     /// 英制
@@ -24,7 +24,7 @@ public enum CYUnit: String, Codable, Equatable {
 
 // MARK: - Unit system for requested unit sets
 
-extension CYUnit {
+extension CaiyunUnit {
     public struct UnitSystem: Equatable {
         public let realtimePrecipitation: UnitSpeed
         public let minutelyPrecipitation: UnitSpeed
@@ -41,15 +41,15 @@ extension CYUnit {
     }
 }
 
-extension CYUnit.UnitSystem {
-    static let metric = CYUnit.UnitSystem(realtimePrecipitation: .intensityRatio, minutelyPrecipitation: .intensityRatio, hourlyPrecipitation: .millimetersPerHour, dailyPrecipitation: .millimetersPerHour, distance: .kilometers, temperature: .celsius, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .kilometersPerHour, cloudrate: .ratio, visibility: .kilometers)
-    static let imperial = CYUnit.UnitSystem(realtimePrecipitation: .inchesPerHour, minutelyPrecipitation: .inchesPerHour, hourlyPrecipitation: .inchesPerHour, dailyPrecipitation: .inchesPerHour, distance: .miles, temperature: .fahrenheit, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .milesPerHour, cloudrate: .ratio, visibility: .miles)
-    static let si = CYUnit.UnitSystem(realtimePrecipitation: .metersPerSecond, minutelyPrecipitation: .metersPerSecond, hourlyPrecipitation: .metersPerSecond, dailyPrecipitation: .metersPerSecond, distance: .meters, temperature: .kelvin, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .metersPerSecond, cloudrate: .ratio, visibility: .meters)
-    static let metricV1 = CYUnit.UnitSystem(realtimePrecipitation: .intensityRatio, minutelyPrecipitation: .intensityRatio, hourlyPrecipitation: .intensityRatio, dailyPrecipitation: .intensityRatio, distance: .kilometers, temperature: .celsius, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .kilometersPerHour, cloudrate: .ratio, visibility: .kilometers)
-    static let metricV2 = CYUnit.UnitSystem(realtimePrecipitation: .millimetersPerHour, minutelyPrecipitation: .millimetersPerHour, hourlyPrecipitation: .millimetersPerHour, dailyPrecipitation: .millimetersPerHour, distance: .kilometers, temperature: .celsius, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .kilometersPerHour, cloudrate: .ratio, visibility: .kilometers)
+extension CaiyunUnit.UnitSystem {
+    static let metric = CaiyunUnit.UnitSystem(realtimePrecipitation: .intensityRatio, minutelyPrecipitation: .intensityRatio, hourlyPrecipitation: .millimetersPerHour, dailyPrecipitation: .millimetersPerHour, distance: .kilometers, temperature: .celsius, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .kilometersPerHour, cloudrate: .ratio, visibility: .kilometers)
+    static let imperial = CaiyunUnit.UnitSystem(realtimePrecipitation: .inchesPerHour, minutelyPrecipitation: .inchesPerHour, hourlyPrecipitation: .inchesPerHour, dailyPrecipitation: .inchesPerHour, distance: .miles, temperature: .fahrenheit, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .milesPerHour, cloudrate: .ratio, visibility: .miles)
+    static let si = CaiyunUnit.UnitSystem(realtimePrecipitation: .metersPerSecond, minutelyPrecipitation: .metersPerSecond, hourlyPrecipitation: .metersPerSecond, dailyPrecipitation: .metersPerSecond, distance: .meters, temperature: .kelvin, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .metersPerSecond, cloudrate: .ratio, visibility: .meters)
+    static let metricV1 = CaiyunUnit.UnitSystem(realtimePrecipitation: .intensityRatio, minutelyPrecipitation: .intensityRatio, hourlyPrecipitation: .intensityRatio, dailyPrecipitation: .intensityRatio, distance: .kilometers, temperature: .celsius, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .kilometersPerHour, cloudrate: .ratio, visibility: .kilometers)
+    static let metricV2 = CaiyunUnit.UnitSystem(realtimePrecipitation: .millimetersPerHour, minutelyPrecipitation: .millimetersPerHour, hourlyPrecipitation: .millimetersPerHour, dailyPrecipitation: .millimetersPerHour, distance: .kilometers, temperature: .celsius, pressure: .pascal, humidity: .ratio, windDirection: .degrees, windSpeed: .kilometersPerHour, cloudrate: .ratio, visibility: .kilometers)
 }
 
-fileprivate let unitSystems: [CYUnit: CYUnit.UnitSystem] = [
+fileprivate let unitSystems: [CaiyunUnit: CaiyunUnit.UnitSystem] = [
     .metric: .metric,
     .imperial: .imperial,
     .si: .si,

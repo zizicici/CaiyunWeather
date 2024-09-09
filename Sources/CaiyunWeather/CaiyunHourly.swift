@@ -1,5 +1,5 @@
 //
-//  CYHourly.swift
+//  CaiyunHourly.swift
 //  
 //
 //  Created by 袁林 on 2021/6/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CYHourly: Codable, Equatable {
+public struct CaiyunHourly: Codable, Equatable {
     
     public let responseStatus: String
     public let description: String
@@ -40,7 +40,7 @@ public struct CYHourly: Codable, Equatable {
 
 // MARK: - Redefined Types
 
-extension CYHourly {
+extension CaiyunHourly {
     public struct AirQuality: Codable, Equatable {
         let aqi: [AQI]
         let pm25: [PM25]
@@ -49,36 +49,36 @@ extension CYHourly {
 
 // MARK: - Type Alias
 
-extension CYHourly {
+extension CaiyunHourly {
     public typealias HourlyContentDouble = ValueWithDatetime<Double>
     
-    public typealias Phenomenon = ValueWithDatetime<CYContent.Phenomenon>
+    public typealias Phenomenon = ValueWithDatetime<CaiyunContent.Phenomenon>
     public typealias Temperature = HourlyContentDouble
     public typealias Precipitation = HourlyContentDouble
     public typealias Cloudrate = HourlyContentDouble
     public typealias Humidity = HourlyContentDouble
     public typealias Pressure = HourlyContentDouble
-    public typealias Wind = ValueWithDatetimeFlat<CYContent.Wind>
+    public typealias Wind = ValueWithDatetimeFlat<CaiyunContent.Wind>
     public typealias Visibility = HourlyContentDouble
     public typealias DSWRF = HourlyContentDouble
-    public typealias AQI = ValueWithDatetime<CYContent.AirQuality.AQI>
+    public typealias AQI = ValueWithDatetime<CaiyunContent.AirQuality.AQI>
     public typealias PM25 = HourlyContentDouble
 }
 
 // MARK: - Abstract Types
 
-extension CYHourly {
+extension CaiyunHourly {
     
     public struct ValueWithDatetime<T: Codable & Equatable>: Codable, Equatable {
         /// 时间
-        public let datetime: CYContent.DatetimeServerType
+        public let datetime: CaiyunContent.DatetimeServerType
         /// 值
         public let value: T
     }
     
     public struct ValueWithDatetimeFlat<T: Codable & Equatable>: Codable, Equatable {
         /// 时间
-        public let datetime: CYContent.DatetimeServerType
+        public let datetime: CaiyunContent.DatetimeServerType
         /// 值
         public let value: T
         
@@ -89,7 +89,7 @@ extension CYHourly {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            datetime = try container.decode(CYContent.DatetimeServerType.self, forKey: .datetime)
+            datetime = try container.decode(CaiyunContent.DatetimeServerType.self, forKey: .datetime)
             value = try T(from: decoder)
         }
         

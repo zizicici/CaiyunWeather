@@ -1,5 +1,5 @@
 //
-//  CYDaily.swift
+//  CaiyunDaily.swift
 //  
 //
 //  Created by 袁林 on 2021/6/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CYDaily: Codable, Equatable {
+public struct CaiyunDaily: Codable, Equatable {
     /// 响应状态
     public let responseStatus: String
     /// 日出日落
@@ -60,11 +60,11 @@ public struct CYDaily: Codable, Equatable {
 
 // MARK: - Redefined Types
 
-extension CYDaily {
+extension CaiyunDaily {
     
     public struct Astronomy: Codable, Equatable {
         /// 日期
-        public let date: CYContent.DatetimeServerType
+        public let date: CaiyunContent.DatetimeServerType
         /// 值
         public let value: AstronomyContent
         
@@ -75,7 +75,7 @@ extension CYDaily {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            date = try container.decode(CYContent.DatetimeServerType.self, forKey: .date)
+            date = try container.decode(CaiyunContent.DatetimeServerType.self, forKey: .date)
             value = try AstronomyContent(from: decoder)
         }
         
@@ -119,7 +119,7 @@ extension CYDaily {
     }
     
     public struct AirQuality: Codable, Equatable {
-        public typealias AQI = AverageAndExtremumWithDate<CYContent.CountryRelated<Double>>
+        public typealias AQI = AverageAndExtremumWithDate<CaiyunContent.CountryRelated<Double>>
         public typealias PM25 = AverageAndExtremumWithDate<Double>
         
         /// AQI
@@ -131,37 +131,37 @@ extension CYDaily {
 
 // MARK: - Type Alias
 
-extension CYDaily {
+extension CaiyunDaily {
     public typealias DailyContentDouble = AverageAndExtremumWithDate<Double>
     
-    public typealias Phenomenon = ValueWithDate<CYContent.Phenomenon>
+    public typealias Phenomenon = ValueWithDate<CaiyunContent.Phenomenon>
     public typealias Temperature = DailyContentDouble
     public typealias Precipitation = DailyContentDouble
     public typealias Pressure = DailyContentDouble
-    public typealias Wind = AverageAndExtremumWithDate<CYContent.Wind>
+    public typealias Wind = AverageAndExtremumWithDate<CaiyunContent.Wind>
     public typealias Cloudrate = DailyContentDouble
     public typealias Humidity = DailyContentDouble
     public typealias DSWRF = DailyContentDouble
     public typealias Visibility = DailyContentDouble
-    public typealias LifeIndex = CYContent.LifeIndex<[IndexWithDescriptionWithDate<String>]>
+    public typealias LifeIndex = CaiyunContent.LifeIndex<[IndexWithDescriptionWithDate<String>]>
 }
 
 // MARK: - Abstract Types
 
-extension CYDaily {
+extension CaiyunDaily {
     
     public struct ValueWithDate<T: Codable & Equatable>: Codable, Equatable {
         /// 时间
-        public let date: CYContent.DatetimeServerType
+        public let date: CaiyunContent.DatetimeServerType
         /// 值
         public let value: T
     }
     
     public struct AverageAndExtremumWithDate<T: Codable & Equatable>: Codable, Equatable {
         /// 时间
-        public let date: CYContent.DatetimeServerType
+        public let date: CaiyunContent.DatetimeServerType
         /// 值
-        public let value: CYContent.AverageAndExtremum<T>
+        public let value: CaiyunContent.AverageAndExtremum<T>
         
         private enum CodingKeys: String, CodingKey {
             case date
@@ -170,8 +170,8 @@ extension CYDaily {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            date = try container.decode(CYContent.DatetimeServerType.self, forKey: .date)
-            value = try CYContent.AverageAndExtremum<T>(from: decoder)
+            date = try container.decode(CaiyunContent.DatetimeServerType.self, forKey: .date)
+            value = try CaiyunContent.AverageAndExtremum<T>(from: decoder)
         }
         
         public func encode(to encoder: Encoder) throws {
@@ -184,9 +184,9 @@ extension CYDaily {
     
     public struct IndexWithDescriptionWithDate<T: Codable & Equatable>: Codable, Equatable {
         /// 时间
-        public let date: CYContent.DatetimeServerType
+        public let date: CaiyunContent.DatetimeServerType
         /// 值
-        public let value: CYContent.IndexWithDescription<T>
+        public let value: CaiyunContent.IndexWithDescription<T>
         
         private enum CodingKeys: String, CodingKey {
             case date
@@ -195,8 +195,8 @@ extension CYDaily {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            date = try container.decode(CYContent.DatetimeServerType.self, forKey: .date)
-            value = try CYContent.IndexWithDescription<T>(from: decoder)
+            date = try container.decode(CaiyunContent.DatetimeServerType.self, forKey: .date)
+            value = try CaiyunContent.IndexWithDescription<T>(from: decoder)
         }
         
         public func encode(to encoder: Encoder) throws {

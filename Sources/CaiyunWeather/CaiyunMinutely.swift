@@ -1,5 +1,5 @@
 //
-//  CYMinutely.swift
+//  CaiyunMinutely.swift
 //  
 //
 //  Created by 袁林 on 2021/6/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CYMinutely: Codable, Equatable {
+public struct CaiyunMinutely: Codable, Equatable {
     /// 数据源
     public let datasource: String
     /// 描述

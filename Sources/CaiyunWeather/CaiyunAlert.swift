@@ -1,5 +1,5 @@
 //
-//  CYAlert.swift
+//  CaiyunAlert.swift
 //  
 //
 //  Created by 袁林 on 2021/6/14.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CYAlert: Codable, Equatable {
+public struct CaiyunAlert: Codable, Equatable {
     /// 响应状态
     public let responseStatus: String
     /// 内容
@@ -19,11 +19,11 @@ public struct CYAlert: Codable, Equatable {
     }
 }
 
-extension CYAlert {
+extension CaiyunAlert {
     
     public struct AlertContent: Codable, Equatable {
         /// 发布时间
-        public let publishTime: CYContent.Datetime1970Based
+        public let publishTime: CaiyunContent.Datetime1970Based
         /// 预警 ID
         public let id: String
         /// 预警信息的状态
@@ -66,7 +66,7 @@ extension CYAlert {
 
 // MARK: - Redefined Types
 
-extension CYAlert.AlertContent {
+extension CaiyunAlert.AlertContent {
     
     public struct AlertCode: Equatable, Codable {
         /// 预警类型
@@ -97,7 +97,7 @@ extension CYAlert.AlertContent {
 
 // MARK: - Lookups
 
-extension CYAlert.AlertContent.AlertCode {
+extension CaiyunAlert.AlertContent.AlertCode {
     
     public enum AlertType: String, Equatable {
         /// 台风
@@ -150,7 +150,7 @@ extension CYAlert.AlertContent.AlertCode {
     }
 }
 
-fileprivate let alertTypeDescriptions: [CYAlert.AlertContent.AlertCode.AlertType: String] = [
+fileprivate let alertTypeDescriptions: [CaiyunAlert.AlertContent.AlertCode.AlertType: String] = [
     .typhoon: "typhoon",
     .rainstorm: "rainstorm",
     .snowstorm: "snowstorm",
@@ -169,7 +169,7 @@ fileprivate let alertTypeDescriptions: [CYAlert.AlertContent.AlertCode.AlertType
     .thunderGust: "thunder-gust",
 ]
 
-fileprivate let alertLevelDescriptions: [CYAlert.AlertContent.AlertCode.AlertLevel: String] = [
+fileprivate let alertLevelDescriptions: [CaiyunAlert.AlertContent.AlertCode.AlertLevel: String] = [
     .blue: "blue",
     .yellow: "yellow",
     .orange: "orange",

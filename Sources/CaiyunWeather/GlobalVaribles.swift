@@ -7,4 +7,4 @@
 
 import Foundation
 
-public var unit: CYUnit = .metric
+public var unit: CaiyunUnit = .metric

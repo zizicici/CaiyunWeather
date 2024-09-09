@@ -1,5 +1,5 @@
 //
-//  CYRealtime.swift
+//  CaiyunRealtime.swift
 //  
 //
 //  Created by 袁林 on 2021/6/13.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CYRealtime: Codable, Equatable {
+public struct CaiyunRealtime: Codable, Equatable {
     /// 响应状态
     public let responseStatus: String
     /// 温度
@@ -26,15 +26,15 @@ public struct CYRealtime: Codable, Equatable {
     public let dswrf: Double
     
     /// 主要天气现象
-    public let phenomenon: CYContent.Phenomenon
+    public let phenomenon: CaiyunContent.Phenomenon
     /// 风向风力
-    public let wind: CYContent.Wind
+    public let wind: CaiyunContent.Wind
     /// 降水量
     public let precipitation: Precipitation
     /// 空气质量
-    public let airQuality: CYContent.AirQuality?
+    public let airQuality: CaiyunContent.AirQuality?
     /// 生活指数
-    public let lifeIndex: CYContent.LifeIndex<CYContent.IndexWithDescription<Int>>
+    public let lifeIndex: CaiyunContent.LifeIndex<CaiyunContent.IndexWithDescription<Int>>
     
     private enum CodingKeys: String, CodingKey {
         case responseStatus = "status"
@@ -55,7 +55,7 @@ public struct CYRealtime: Codable, Equatable {
 
 // MARK: - Redefined Types
 
-extension CYRealtime {
+extension CaiyunRealtime {
     /// 降水量
     public struct Precipitation: Codable, Equatable {
         /// 本地

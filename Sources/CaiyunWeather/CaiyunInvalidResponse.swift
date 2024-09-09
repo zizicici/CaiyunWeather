@@ -1,5 +1,5 @@
 //
-//  CYInvalidResponse.swift
+//  CaiyunInvalidResponse.swift
 //  
 //
 //  Created by 袁林 on 2021/6/12.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CYInvalidResponse: Codable, Equatable {
+struct CaiyunInvalidResponse: Codable, Equatable {
     /// 状态
     let status: String
     /// 错误信息

@@ -1,5 +1,5 @@
 //
-//  CYContent.swift
+//  CaiyunContent.swift
 //  
 //
 //  Created by 袁林 on 2021/6/13.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CYContent: Codable, Equatable {
+public struct CaiyunContent: Codable, Equatable {
     /// 日期时间（1970 年至今的秒数）
     public struct Datetime1970Based: Codable, Equatable {
         public let time: Date
@@ -129,7 +129,7 @@ public struct CYContent: Codable, Equatable {
 
 // MARK: - Type of Constant Codes
 
-extension CYContent {
+extension CaiyunContent {
     
     public enum Phenomenon: String, Codable, Equatable {
         /// 晴（白天）
@@ -180,7 +180,7 @@ extension CYContent {
 
 // MARK: - Abstract Types
 
-extension CYContent {
+extension CaiyunContent {
     
     public struct CountryRelated<T: Codable & Equatable>: Codable, Equatable {
         /// 国标

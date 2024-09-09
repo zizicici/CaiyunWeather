@@ -1,5 +1,5 @@
 //
-//  CYResult.swift
+//  CaiyunResult.swift
 //  
 //
 //  Created by 袁林 on 2021/6/13.
@@ -7,17 +7,17 @@
 
 import Foundation
 
-public struct CYResult: Codable, Equatable {
+public struct CaiyunResult: Codable, Equatable {
     /// 天气预警
-    public let alert: CYAlert
+    public let alert: CaiyunAlert
     /// 实况天气信息
-    public let realtime: CYRealtime
+    public let realtime: CaiyunRealtime
     /// 逐分钟天气预报
-    public let minutely: CYMinutely
+    public let minutely: CaiyunMinutely
     /// 逐小时天气预报
-    public let hourly: CYHourly
+    public let hourly: CaiyunHourly
     /// 逐日天气预报
-    public let daily: CYDaily
+    public let daily: CaiyunDaily
     ///
     // let primary: Int
     /// 天气要点
@@ -29,7 +29,6 @@ public struct CYResult: Codable, Equatable {
         case minutely
         case hourly
         case daily
-        // case primary
         case keypoint = "forecast_keypoint"
     }
 }
