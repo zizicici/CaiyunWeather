@@ -9,6 +9,5 @@ import Foundation
 
 public enum CaiyunError: Error, Equatable {
     case invalidURL
-    case fileDontExist
     case invalidResponse(description: String)
 }
