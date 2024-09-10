@@ -35,15 +35,21 @@ extension CaiyunRequest {
     /// 3. it is not expired.
     ///
     /// Elsewise, a new data will be requested from remote API.
-    public func perform(completionHandler: @escaping (CaiyunResponse?, Error?) -> Void) {
-        queue.async { [weak self] in
-            self?.fetchDataFromRemote { data, error in
-                guard let data = data else {
-                    completionHandler(nil, error)
-                    return
-                }
-                self?.decode(data) { response, error in
-                    completionHandler(response, error)
+    public func perform(completionHandler: @escaping (Result<CaiyunResponse, Error>) -> Void) {
+        queue.async { [self] in
+            self.fetchDataFromRemote { result in
+                switch result {
+                case .success(let data):
+                    self.decode(data) { result in
+                        switch result {
+                        case .success(let success):
+                            completionHandler(.success(success))
+                        case .failure(let error):
+                            completionHandler(.failure(error))
+                        }
+                    }
+                case .failure(let error):
+                    completionHandler(.failure(error))
                 }
             }
         }
@@ -53,22 +59,24 @@ extension CaiyunRequest {
 // MARK: - Work with data
 
 extension CaiyunRequest {
-    
-    /// Explicitly fetch data.
-    public func fetchData(completionHandler: @escaping (Data?, Error?) -> Void) {
-        fetchDataFromRemote(completionHandler: completionHandler)
-    }
-    
     /// Explicitly fetch data from API.
-    func fetchDataFromRemote(completionHandler: @escaping (Data?, Error?) -> Void) {
+    func fetchDataFromRemote(completionHandler: @escaping (Result<Data, Error>) -> Void) {
         queue.async { [self] in
             guard let url = endpoint.url else {
-                completionHandler(nil, CaiyunError.invalidURL)
+                completionHandler(.failure(CaiyunError.invalidURL))
                 return
             }
             
             URLSession.shared.dataTask(with: url) { (data, _, error) in
-                completionHandler(data, error)
+                if let error = error {
+                    completionHandler(.failure(error))
+                } else {
+                    if let data = data {
+                        completionHandler(.success(data))
+                    } else {
+                        completionHandler(.failure(CaiyunError.invalidData))
+                    }
+                }
                 NSLog("Performed a remote data fatching. URL: %@", url.absoluteString)
             }
             .resume()
@@ -82,19 +90,19 @@ extension CaiyunRequest {
     
     /// Decode the data. May result in `CaiyunResponse`, `CaiyunInvalidResponse`, or cannot decode.
     /// Resulting in `CaiyunInvalidResponse` means there's some error with your token, so the `error` return will be `CaiyunError.invalidResponse(description: invalidResponse.error)`.
-    public func decode(_ data: Data, completionHandler: @escaping (CaiyunResponse?, CaiyunError?) -> Void) {
+    public func decode(_ data: Data, completionHandler: @escaping (Result<CaiyunResponse, CaiyunError>) -> Void) {
         queue.async {
             let decoder = JSONDecoder()
             if let response = try? decoder.decode(CaiyunResponse.self, from: data) {
-                completionHandler(response, nil)
+                completionHandler(.success(response))
                 NSLog("Successfully decode content.", 0)
             }
             else if let invalidResponse = try? decoder.decode(CaiyunInvalidResponse.self, from: data) {
-                completionHandler(nil, .invalidResponse(description: invalidResponse.error))
+                completionHandler(.failure(.invalidResponse(description: invalidResponse.error)))
                 NSLog("API return invalid result. API error content: %@", invalidResponse.error)
             }
             else {
-                completionHandler(nil, .invalidResponse(description: "unexpected result"))
+                completionHandler(.failure(.invalidResponse(description: "unexpected result")))
                 NSLog("API return unexpected result", -1)
             }
         }

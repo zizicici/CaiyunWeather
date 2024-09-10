@@ -36,7 +36,7 @@ public struct CaiyunEndpoint: Codable, Equatable {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.caiyunapp.com"
-        components.path = [version, token, "\(latitude!),\(longitude!)", "weather"].joined(separator: "/")
+        components.path = "/" + [version, token, locationString(), "weather"].joined(separator: "/")
         components.queryItems = [
             URLQueryItem(name: "alert", value: "\(shouldIncludeAlerts)"),
             URLQueryItem(name: "dailysteps", value: "\(dailyLength)"),
@@ -44,5 +44,9 @@ public struct CaiyunEndpoint: Codable, Equatable {
             URLQueryItem(name: "begin", value: "\(startTimestamp!)")
         ]
         return components
+    }
+    
+    private func locationString() -> String {
+        return String(format: "%.4f,%.4f", longitude!, latitude!)
     }
 }

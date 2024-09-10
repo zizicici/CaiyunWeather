@@ -8,6 +8,7 @@
 import Foundation
 
 public enum CaiyunError: Error, Equatable {
+    case invalidData
     case invalidURL
     case invalidResponse(description: String)
 }
