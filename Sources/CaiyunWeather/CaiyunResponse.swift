@@ -17,7 +17,7 @@ public struct CaiyunResponse: Codable, Equatable {
     /// 请求语言
     public let language: String
     /// 单位制
-    public let unit: CaiyunUnit
+    public let unit: String
     /// 返回点经纬度
     public let latitude: Double
     public let longitude: Double
@@ -46,7 +46,7 @@ public struct CaiyunResponse: Codable, Equatable {
         apiVersion = try container.decode(String.self, forKey: .version)
         apiStatus = try container.decode(String.self, forKey: .apiStatus)
         language = try container.decode(String.self, forKey: .language)
-        unit = try container.decode(CaiyunUnit.self, forKey: .unit)
+        unit = try container.decode(String.self, forKey: .unit)
         var locationContainer = try container.nestedUnkeyedContainer(forKey: .location)
         latitude = try locationContainer.decode(Double.self)
         longitude = try locationContainer.decode(Double.self)

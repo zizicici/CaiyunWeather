@@ -39,6 +39,7 @@ public struct CaiyunEndpoint: Codable, Equatable {
         components.path = "/" + [version, token, locationString(), "weather"].joined(separator: "/")
         components.queryItems = [
             URLQueryItem(name: "alert", value: "\(shouldIncludeAlerts)"),
+            URLQueryItem(name: "unit", value: "metric:v2"),
             URLQueryItem(name: "dailysteps", value: "\(dailyLength)"),
             URLQueryItem(name: "hourlysteps", value: "\(hourlyLength)"),
             URLQueryItem(name: "begin", value: "\(startTimestamp!)")
