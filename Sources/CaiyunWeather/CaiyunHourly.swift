@@ -13,6 +13,7 @@ public struct CaiyunHourly: Codable, Equatable {
     public let description: String
     public let phenomenon: [Phenomenon]
     public let temperature: [Temperature]
+    public let apparentTemperature: [Temperature]
     public let precipitation: [Precipitation]
     public let cloudrate: [Cloudrate]
     public let humidity: [Humidity]
@@ -27,6 +28,7 @@ public struct CaiyunHourly: Codable, Equatable {
         case description
         case phenomenon = "skycon"
         case temperature
+        case apparentTemperature = "apparent_temperature"
         case precipitation
         case cloudrate
         case humidity
@@ -54,7 +56,7 @@ extension CaiyunHourly {
     
     public typealias Phenomenon = ValueWithDatetime<CaiyunContent.Phenomenon>
     public typealias Temperature = HourlyContentDouble
-    public typealias Precipitation = HourlyContentDouble
+    public typealias Precipitation = ValueWithDatetimeFlat<CaiyunContent.Precipitation>
     public typealias Cloudrate = HourlyContentDouble
     public typealias Humidity = HourlyContentDouble
     public typealias Pressure = HourlyContentDouble

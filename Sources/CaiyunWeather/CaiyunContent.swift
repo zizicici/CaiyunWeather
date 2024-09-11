@@ -59,6 +59,12 @@ public struct CaiyunContent: Codable, Equatable {
         public let dressing: T?
     }
     
+    public struct Precipitation: Codable, Equatable {
+        public let value: Double
+        
+        public let probability: Double
+    }
+    
     /// 风
     public struct Wind: Codable, Equatable {
         /// 风速
