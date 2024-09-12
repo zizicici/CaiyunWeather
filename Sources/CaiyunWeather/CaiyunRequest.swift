@@ -54,6 +54,17 @@ extension CaiyunRequest {
             }
         }
     }
+    
+    @available(iOS 15.0, *)
+    public func perform() async throws -> CaiyunResponse {
+        do {
+            let data = try await fetchDataFromRemote()
+            let decodedResponse = try decode(data)
+            return decodedResponse
+        } catch {
+            throw error
+        }
+    }
 }
 
 // MARK: - Work with data
@@ -82,6 +93,24 @@ extension CaiyunRequest {
             .resume()
         }
     }
+    
+    @available(iOS 15.0, *)
+    func fetchDataFromRemote() async throws -> Data {
+        guard let url = endpoint.url else {
+            throw CaiyunError.invalidURL
+        }
+
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                throw URLError(.badServerResponse)
+            }
+            NSLog("Performed a remote data fatching. URL: %@", url.absoluteString)
+            return data
+        } catch {
+            throw error
+        }
+    }
 }
 
 // MARK: - Decoding and Validating
@@ -105,6 +134,21 @@ extension CaiyunRequest {
                 completionHandler(.failure(.invalidResponse(description: "unexpected result")))
                 NSLog("API return unexpected result", -1)
             }
+        }
+    }
+    
+    @available(iOS 15.0, *)
+    private func decode(_ data: Data) throws -> CaiyunResponse {
+        let decoder = JSONDecoder()
+        if let response = try? decoder.decode(CaiyunResponse.self, from: data) {
+            NSLog("Successfully decode content.", 0)
+            return response
+        } else if let invalidResponse = try? decoder.decode(CaiyunInvalidResponse.self, from: data) {
+            NSLog("API return invalid result. API error content: %@", invalidResponse.error)
+            throw CaiyunError.invalidResponse(description: invalidResponse.error)
+        } else {
+            NSLog("API return unexpected result", -1)
+            throw CaiyunError.invalidResponse(description: "unexpected result")
         }
     }
     
