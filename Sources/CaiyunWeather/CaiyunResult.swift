@@ -9,11 +9,11 @@ import Foundation
 
 public struct CaiyunResult: Codable, Equatable {
     /// 天气预警
-    public let alert: CaiyunAlert
+    public let alert: CaiyunAlert?
     /// 实况天气信息
     public let realtime: CaiyunRealtime
     /// 逐分钟天气预报
-    public let minutely: CaiyunMinutely
+    public let minutely: CaiyunMinutely?
     /// 逐小时天气预报
     public let hourly: CaiyunHourly
     /// 逐日天气预报
