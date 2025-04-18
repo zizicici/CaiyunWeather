@@ -133,10 +133,11 @@ extension CaiyunDaily {
 
 extension CaiyunDaily {
     public typealias DailyContentDouble = AverageAndExtremumWithDate<Double>
-    
+    public typealias DailyProbabilityContentDouble = AverageAndExtremumAndProbabilityWithDate<Double>
+
     public typealias Phenomenon = ValueWithDate<CaiyunContent.Phenomenon>
     public typealias Temperature = DailyContentDouble
-    public typealias Precipitation = DailyContentDouble
+    public typealias Precipitation = DailyProbabilityContentDouble
     public typealias Pressure = DailyContentDouble
     public typealias Wind = AverageAndExtremumWithDate<CaiyunContent.Wind>
     public typealias Cloudrate = DailyContentDouble
@@ -172,6 +173,31 @@ extension CaiyunDaily {
             
             date = try container.decode(CaiyunContent.DatetimeServerType.self, forKey: .date)
             value = try CaiyunContent.AverageAndExtremum<T>(from: decoder)
+        }
+        
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            
+            try container.encode(date, forKey: .date)
+            try value.encode(to: encoder)
+        }
+    }
+    
+    public struct AverageAndExtremumAndProbabilityWithDate<T: Codable & Equatable>: Codable, Equatable {
+        /// 时间
+        public let date: CaiyunContent.DatetimeServerType
+        /// 值
+        public let value: CaiyunContent.AverageAndExtremumAndProbability<T>
+        
+        private enum CodingKeys: String, CodingKey {
+            case date
+        }
+        
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            date = try container.decode(CaiyunContent.DatetimeServerType.self, forKey: .date)
+            value = try CaiyunContent.AverageAndExtremumAndProbability<T>(from: decoder)
         }
         
         public func encode(to encoder: Encoder) throws {

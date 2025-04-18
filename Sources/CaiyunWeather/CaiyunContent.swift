@@ -215,6 +215,24 @@ extension CaiyunContent {
             case minimum = "min"
         }
     }
+    
+    public struct AverageAndExtremumAndProbability<T: Codable & Equatable>: Codable, Equatable {
+        /// 平均值
+        public let average: T
+        /// 最大值
+        public let maximum: T
+        /// 最小值
+        public let minimum: T
+        
+        public let probability: T
+        
+        private enum CodingKeys: String, CodingKey {
+            case average = "avg"
+            case maximum = "max"
+            case minimum = "min"
+            case probability = "probability"
+        }
+    }
 }
 
 //// MARK: - Wind description of direction and speed
