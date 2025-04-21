@@ -18,8 +18,8 @@ public class CaiyunRequest {
     /// The queue on which the request is performed
     public var queue: DispatchQueue = .global(qos: .background)
     
-    public init(token: String, latitude: Double, longitude: Double, startTimestamp: Int) {
-        self.endpoint = CaiyunEndpoint(token: token, latitude: latitude, longitude: longitude, startTimestamp: startTimestamp)
+    public init(token: String, latitude: Double, longitude: Double, startTimestamp: Int, hourlyLength: Int, dailyLength: Int) {
+        self.endpoint = CaiyunEndpoint(token: token, latitude: latitude, longitude: longitude, startTimestamp: startTimestamp, hourlyLength: hourlyLength, dailyLength: dailyLength)
     }
 }
 

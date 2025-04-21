@@ -17,10 +17,12 @@ public struct CaiyunEndpoint: Codable, Equatable {
     private var dailyLength: Int = 7
     private var startTimestamp: Int!
     
-    public init(token: String, latitude: Double, longitude: Double, startTimestamp: Int) {
+    public init(token: String, latitude: Double, longitude: Double, startTimestamp: Int, hourlyLength: Int = 72, dailyLength: Int = 7) {
         self.token = token
         self.latitude = latitude
         self.longitude = longitude
+        self.hourlyLength = hourlyLength
+        self.dailyLength = dailyLength
         self.startTimestamp = startTimestamp
     }
     
